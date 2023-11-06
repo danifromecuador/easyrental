@@ -2,13 +2,19 @@ class SessionsController < ApplicationController
   def new; end
 
   def create
-    user = User.find_by(name: params[:session][:name])
+    username = params[:session][:name]
+    user = User.find_by(name: username)
 
     if user
-      redirect_to cars_path
+      if username == 'admin'
+        flash[:alert] = 'You cannot log in as admin. Try again'
+        redirect_to login_path
+      else
+        redirect_to cars_path
+      end
     else
-      flash[:alert] = "The username that you entered doesn't exist in our database"
-      redirect_to login_path
+      flash[:alert] = "The username that you entered doesn't exist in our database. Try again or create a new user."
+      redirect_to root_path
     end
   end
 end
