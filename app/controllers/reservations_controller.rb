@@ -1,11 +1,13 @@
 class ReservationsController < ApplicationController
   def new
     @reservation = Reservation.new
-    @car = Car.find(params[:car_id]) # You need to fetch the specific car for reservation
+    @car = Car.find(params[:car_id])
   end
 
   def create
-    @reservation = Reservation.new(reservation_params)
+    @reservation = current_user.reservations.build(reservation_params)
+    @car = Car.find(@reservation.car_id)
+
     if @reservation.save
       flash[:notice] = 'Car reserved successfully'
       redirect_to cars_path

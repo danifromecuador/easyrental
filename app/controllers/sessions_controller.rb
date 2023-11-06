@@ -3,13 +3,14 @@ class SessionsController < ApplicationController
 
   def create
     username = params[:session][:name]
-    user = User.find_by(name: username)
+    user = User.find_by(name: params[:session][:name])
 
     if user
       if username == 'admin'
         flash[:alert] = 'You cannot log in as admin. Try again'
         redirect_to login_path
       else
+        session[:user_id] = user.id
         redirect_to cars_path
       end
     else
