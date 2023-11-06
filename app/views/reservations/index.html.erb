@@ -1,0 +1,17 @@
+<% if @reservations.empty? %>
+  <p>There are no reservations.</p>
+<% else %>
+  <% @reservations.each do |r| %>
+    <ul>
+      <li>
+        The <span><%= r.car.model %></span>
+        was reserved by: <span><%= r.user.name %></span>
+        for this city: <span><%= r.city %></span>
+        at this date: <span><%= r.date %></span>
+      </li>
+    </ul>
+  <% end %>
+<% end %>
+
+<%= link_to "Back", cars_path %>
+

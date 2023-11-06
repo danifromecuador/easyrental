@@ -1,4 +1,6 @@
-welcome to all cars view
+
+<%= link_to "show all reservations", reservations_path %>
+<h1>welcome to all cars view</h1>
 
 
 <% @cars.each do |c| %>
@@ -19,3 +21,5 @@ welcome to all cars view
     -----------------------
   </ul>
 <% end %>
+
+<%= link_to "Back", root_path %>
