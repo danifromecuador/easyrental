@@ -1,1 +1,21 @@
 welcome to all cars view
+
+
+<% @cars.each do |c| %>
+  <ul>
+    <li>
+      <p><%= c.model %></p>
+    </li>
+    <li>
+      <p><%= c.price %></p>
+    </li>
+    <li>
+      <p><%= c.description %></p>
+    </li>
+    <li>
+      <p><%= c.owner.name %></p>
+    </li>
+    <li><%= link_to "Reserve", new_reservation_path(car_id: c.id) %></li>
+    -----------------------
+  </ul>
+<% end %>
