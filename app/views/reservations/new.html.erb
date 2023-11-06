@@ -1,0 +1,12 @@
+<%= form_for @reservation do |f| %>
+  <div class="field">
+    <%= f.label :city %>
+    <%= f.text_field :city %>
+  </div>
+  <div class="field">
+    <%= f.label :date %>
+    <%= f.date_field :date %>
+  </div>
+  <%= f.hidden_field :car_id, value: @car.id %>
+  <%= f.submit 'Reserve' %>
+<% end %>
