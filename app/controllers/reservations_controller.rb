@@ -1,4 +1,8 @@
 class ReservationsController < ApplicationController
+  def index
+    @reservations = Reservation.all
+  end
+
   def new
     @reservation = Reservation.new
     @car = Car.find(params[:car_id])

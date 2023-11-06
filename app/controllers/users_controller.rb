@@ -6,14 +6,21 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    username = params[:user][:name]
+    pp username
 
-    if @user.name == 'admin'
-      flash[:alert] = 'You cannot create an admin user. Try again with a different name'
-      redirect_to root_path
-    elsif @user.save
-      flash[:notice] = 'User successfully created. Please log in'
-      redirect_to login_path
+    if User.exists?(name: username)
+      flash[:alert] = "The username '#{username}' is already in use. Please choose a different username."
+      @user = User.new # Initialize @user to avoid the 'nil' error
+      redirect_to signup_path
+    else
+      @user = User.new(user_params)
+      if @user.save
+        flash[:notice] = 'User successfully created, now please log in'
+        redirect_to login_path
+      else
+        render 'new'
+      end
     end
   end
 
